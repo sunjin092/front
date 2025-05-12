@@ -1,0 +1,61 @@
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 어두운 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* 다른 요소들 위에 모달이 표시되도록 */
+}
+
+/* 모달 내용 */
+.modal-content {
+  position: relative; /* 이걸 추가하여 버튼이 올바르게 위치할 수 있게 함 */
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px; /* 최대 너비 지정 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 닫기 버튼 */
+.modal-close {
+    width: 10%;
+    height: 20%;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 24px;  /* 크기 적당히 설정 */
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+}
+
+.modal-close:hover {
+  color: #666;
+}
+
+.intro-header h2 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.intro-body {
+  margin-top: 16px;
+}
+
+.intro-body ul {
+  list-style: none;
+  padding: 0;
+}
+
+.intro-body li {
+  margin-bottom: 8px;
+}

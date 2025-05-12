@@ -1,0 +1,93 @@
+/* InfoInput.css */
+
+
+.infoinput-container{
+    max-width: 500px;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-container {
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.info-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #F28C8C;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.info-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.input-group input[type="text"],
+.input-group select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.checkbox-group label {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  user-select: none;
+}
+
+.checkbox-group input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox-group input[type="checkbox"]:checked + label {
+  background-color: #F28C8C;
+  color: white;
+  border-color: #F28C8C;
+}
+
+.submit-button {
+  margin-top: 30px;
+  padding: 12px 20px;
+  background-color: #F28C8C;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #d76d6d;
+}

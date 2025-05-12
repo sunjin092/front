@@ -1,0 +1,107 @@
+/* src/pages/Result.css */
+
+.result-container {
+  padding: 20px;
+  max-width: 100%;
+  /* margin: 0 auto; */
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;  /* 좌우 배치 */
+  gap: 20px;  /* 박스 간 간격 */
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.analysis-result-box,
+.product-recommendations-box {
+  flex: 1;  /* 각각 박스의 크기를 균등하게 맞추기 위해 */
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  justify-content:left;
+  
+}
+
+.analysis-result-box {
+  border: 2px solid #F4A9A8; /* 분석 결과 박스에 경계선 */
+}
+
+.product-recommendations-box {
+  border: 2px solid #6FCF97; /* 화장품 추천 박스에 경계선 */
+}
+
+.legend {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 10px;
+  margin:10px
+}
+
+.legend-box {
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 8px;
+}
+
+.low {
+  background-color: #F28C8C;
+}
+
+.medium {
+  background-color: #6FCF97;
+}
+
+.high {
+  background-color: #A2D5F2;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.recommend-title {
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.product-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.product-header {
+  font-weight: bold;
+}
+
+.product-name {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.product-tags {
+  font-size: 14px;
+  margin-top: 5px;
+  color: #6FCF97;
+}
+
+.product-volume {
+  font-size: 14px;
+  margin-top: 5px;
+  color: #888;
+}
