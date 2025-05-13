@@ -7,46 +7,44 @@ const ImageUploader: React.FC = () => {
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
-        setSelectedFile(e.target.files[0]);
+            setSelectedFile(e.target.files[0]);
         }
     };
 
     const handleUpload = async () => {
         if (!selectedFile) {
-        alert('이미지를 선택해주세요.');
-        return;
+            alert('이미지를 선택해주세요.');
+            return;
         }
 
         const formData = new FormData();
-        formData.append('image', selectedFile);
+        formData.append('file', selectedFile);  // ✅ FastAPI 쪽에서 요구하는 key 이름
 
         try {
-        const response = await fetch('http://localhost:8000/analyze', {
-            method: 'POST',
-            body: formData,
-        });
+            const response = await fetch('https://capstone1-backend-deploy.up.railway.app/analyze-recommend', {
+                method: 'POST',
+                body: formData,
+            });
 
-        if (!response.ok) {
-            throw new Error('서버 응답 오류');
-        }
+            if (!response.ok) {
+                throw new Error(`서버 오류: ${response.status}`);
+            }
 
-        const data = await response.json();
-        localStorage.setItem('analysisResult', JSON.stringify(data));
-        navigate('/result');
+            const data = await response.json();
+            localStorage.setItem('analysisResult', JSON.stringify(data));
+            navigate('/result');
         } catch (error) {
-        alert('이미지 분석에 실패했습니다.');
-        console.error(error);
+            alert('이미지 분석 요청에 실패했습니다.');
+            console.error('❌ 오류 내용:', error);
         }
     };
 
     return (
         <div>
-        <label htmlFor="file-upload"></label>
-        <input id="file-upload" type="file" accept="image/*" onChange={handleFileChange} />
-
-        <button type="button" onClick={handleUpload}>
-            분석 요청
-        </button>
+            <input id="file-upload" type="file" accept="image/*" onChange={handleFileChange} />
+            <button type="button" onClick={handleUpload}>
+                분석 요청
+            </button>
         </div>
     );
 };
