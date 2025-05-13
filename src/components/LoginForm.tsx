@@ -11,7 +11,7 @@ const LoginForm: React.FC = () => {
         if (email && password) {
         // 실제 로그인 로직 (예: 서버 인증)은 여기에
         alert('로그인 성공!');
-        navigate('/'); // 로그인 성공 후 이미지 업로드 페이지로 이동
+        navigate('/upload'); // 로그인 성공 후 이미지 업로드 페이지로 이동
         } else {
         alert('이메일과 비밀번호를 입력해주세요.');
         }
