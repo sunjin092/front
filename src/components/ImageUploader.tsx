@@ -21,7 +21,7 @@ const ImageUploader: React.FC = () => {
         formData.append('file', selectedFile);  // ✅ FastAPI 쪽에서 요구하는 key 이름
 
         try {
-            const response = await fetch('https://capstone1-backend-deploy.up.railway.app/analyze-recommend', {
+            const response = await fetch('https://capstone1-backend-deploy-production.up.railway.app', {
                 method: 'POST',
                 body: formData,
             });
