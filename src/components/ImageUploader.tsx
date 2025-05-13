@@ -18,7 +18,7 @@ const ImageUploader: React.FC = () => {
         }
 
         const formData = new FormData();
-        formData.append('file', selectedFile);  // ✅ FastAPI 쪽에서 요구하는 key 이름
+        formData.append('file', selectedFile);  // ✅ FastAPI에서 요구하는 키: 'file'
 
         try {
             const response = await fetch('https://capstone1-backend-deploy-production.up.railway.app/analyze-recommend', {
@@ -31,7 +31,10 @@ const ImageUploader: React.FC = () => {
             }
 
             const data = await response.json();
-            localStorage.setItem('analysisResult', JSON.stringify(data));
+
+            // ✅ analysis만 localStorage에 저장
+            localStorage.setItem('analysisResult', JSON.stringify(data.analysis));
+
             navigate('/result');
         } catch (error) {
             alert('이미지 분석 요청에 실패했습니다.');
