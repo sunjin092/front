@@ -60,18 +60,26 @@ const sampleProducts: Product[] = [
 const Result: React.FC = () => {
   const [result, setResult] = useState<AnalysisResult | null>(null);
 
-  useEffect(() => {
-    const stored = localStorage.getItem('analysisResult');
-    if (stored) {
-      setResult(JSON.parse(stored));
-    } else {
-      setResult({
-        pores: 472,
-        elasticity: 0.5,
-        moisture: 0.84,
-      });
-    }
-  }, []);
+useEffect(() => {
+  const stored = localStorage.getItem('analysisResult');
+  if (stored) {
+    const parsed = JSON.parse(stored);
+    const { analysis } = parsed;
+
+    setResult({
+      pores: analysis['모공'] ?? 0,
+      elasticity: analysis['탄력'] ?? 0,
+      moisture: analysis['수분'] ?? 0,
+    });
+  } else {
+    setResult({
+      pores: 472,
+      elasticity: 0.5,
+      moisture: 0.84,
+    });
+  }
+}, []);
+
 
   if (!result) return <div>분석 결과를 불러오는 중입니다...</div>;
 
