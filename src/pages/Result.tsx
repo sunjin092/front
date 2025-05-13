@@ -65,13 +65,19 @@ useEffect(() => {
   if (stored) {
     const regions = JSON.parse(stored);
 
-    const pores = Math.round((regions['왼쪽 볼']['모공 개수'] + regions['오른쪽 볼']['모공 개수']) / 2);
-    const elasticity = Math.round((regions['이마']['탄력'] + regions['왼쪽 볼']['탄력'] + regions['오른쪽 볼']['탄력'] + regions['턱']['탄력']) / 4);
-    const moisture = Math.round((regions['이마']['수분'] + regions['왼쪽 볼']['수분'] + regions['오른쪽 볼']['수분'] + regions['턱']['수분']) / 4);
+    const leftCheek = regions['왼쪽 볼'] || {};
+    const rightCheek = regions['오른쪽 볼'] || {};
+    const forehead = regions['이마'] || {};
+    const chin = regions['턱'] || {};
+
+    const pores = Math.round(((leftCheek['모공 개수'] ?? 0) + (rightCheek['모공 개수'] ?? 0)) / 2);
+    const elasticity = Math.round(((forehead['탄력'] ?? 0) + (leftCheek['탄력'] ?? 0) + (rightCheek['탄력'] ?? 0) + (chin['탄력'] ?? 0)) / 4);
+    const moisture = Math.round(((forehead['수분'] ?? 0) + (leftCheek['수분'] ?? 0) + (rightCheek['수분'] ?? 0) + (chin['수분'] ?? 0)) / 4);
 
     setResult({ pores, elasticity, moisture });
   }
 }, []);
+
 
 
   if (!result) return <div>분석 결과를 불러오는 중입니다...</div>;
