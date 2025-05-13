@@ -64,12 +64,12 @@ useEffect(() => {
   const stored = localStorage.getItem('analysisResult');
   if (stored) {
     const parsed = JSON.parse(stored);
-    const { analysis } = parsed;
+    const { regions } = parsed.analysis;
 
     setResult({
-      pores: analysis['모공'] ?? 0,
-      elasticity: analysis['탄력'] ?? 0,
-      moisture: analysis['수분'] ?? 0,
+      pores: Math.round((regions['왼쪽 볼']['모공 개수'] + regions['오른쪽 볼']['모공 개수']) / 2),
+      elasticity: Math.round((regions['이마']['탄력'] + regions['왼쪽 볼']['탄력'] + regions['오른쪽 볼']['탄력'] + regions['턱']['탄력']) / 4),
+      moisture: Math.round((regions['이마']['수분'] + regions['왼쪽 볼']['수분'] + regions['오른쪽 볼']['수분'] + regions['턱']['수분']) / 4),
     });
   } else {
     setResult({
@@ -79,6 +79,7 @@ useEffect(() => {
     });
   }
 }, []);
+
 
 
   if (!result) return <div>분석 결과를 불러오는 중입니다...</div>;
