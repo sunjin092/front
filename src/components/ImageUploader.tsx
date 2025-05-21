@@ -10,18 +10,22 @@ const ImageUploader: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const state = location.state as {
-      gender: string;
-      age: string;
-      concerns: string[];
-    };
-    if (state) {
-      setGender(state.gender ?? '');
-      const parsedAge = parseInt(state.age.replace('대', ''));
-      setAge(isNaN(parsedAge) ? 0 : parsedAge);
-      setSelectedConcerns(state.concerns ?? []);
-    }
-  }, [location.state]);
+  const state = location.state as {
+    gender?: string;
+    age?: number;
+    concerns?: string[];
+  };
+
+  if (state?.gender && state?.age) {
+    setGender(state.gender);
+    setAge(state.age); // 여기서 그냥 숫자로 바로 사용
+    setSelectedConcerns(state.concerns ?? []);
+  } else {
+    alert('입력 정보가 누락되어 첫 페이지로 이동합니다.');
+    navigate('/');
+  }
+}, [location.state]);
+
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
