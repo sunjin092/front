@@ -41,7 +41,7 @@ const ImageUploader: React.FC = () => {
     const formData = new FormData();
     formData.append('file', selectedFile);
     formData.append('gender', gender === '여성' ? '여' : '남');
-    formData.append('age_group', age.toString());
+    formData.append('age_group', `${age}대`);
     selectedConcerns.forEach((item) => {
         formData.append('concerns', item);
     });
