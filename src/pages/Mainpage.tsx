@@ -10,7 +10,7 @@ const MainPage: React.FC = () => {
   const [gender, setGender] = useState<string | null>(null);
   const [typedText, setTypedText] = useState('');
   const [name, setName] = useState('');
-  const [ageRange, setAgeRange] = useState(''); // 추가
+  const [ageRange, setAgeRange] = useState('');
   const [startAnimation, setStartAnimation] = useState(false);
 
   const handleStartAnalysis = () => {
@@ -21,15 +21,16 @@ const MainPage: React.FC = () => {
     setStartAnimation(true);
   };
 
-const fullText = `개인의 피부 이미지를 분석하여, 피부 타입과 고민에 최적화된 화장품을 추천합니다.
+  const fullText = `개인의 피부 이미지를 분석하여, 피부 타입과 고민에 최적화된 화장품을 추천합니다.
 화장품 기능, 사용자 고민을 통합해 더 정확하고 신뢰도 높은 추천 결과를 제공합니다.
 전문가가 아니어도 누구나 손쉽게 정밀한 피부 진단과 효과적인 스킨케어 제품 선택이 가능합니다.`;
 
+  // ✅ 안전하게 텍스트 한 글자씩 표시 (undefined 방지)
   useEffect(() => {
     let i = 0;
     const interval = setInterval(() => {
-      if (i < fullText.length) {
-        setTypedText((prev) => prev + fullText[i]);
+      if (i <= fullText.length) {
+        setTypedText(fullText.slice(0, i));
         i++;
       } else {
         clearInterval(interval);
@@ -40,19 +41,18 @@ const fullText = `개인의 피부 이미지를 분석하여, 피부 타입과 �
 
   useEffect(() => {
     if (startAnimation) {
-     const timer = setTimeout(() => {
-       navigate('/stepone', {
-        state: {
-          gender,
-          age: parseInt(ageRange),
-          concerns: skinConcerns
-        }
-      });
-    }, 1000);
-    return () => clearTimeout(timer);
-  }
-}, [startAnimation, navigate, gender, ageRange, skinConcerns]);
-
+      const timer = setTimeout(() => {
+        navigate('/stepone', {
+          state: {
+            gender,
+            age: parseInt(ageRange),
+            concerns: skinConcerns,
+          },
+        });
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [startAnimation, navigate, gender, ageRange, skinConcerns]);
 
   const handleConcernChange = (concern: string) => {
     setSkinConcerns((prev) =>
@@ -71,8 +71,8 @@ const fullText = `개인의 피부 이미지를 분석하여, 피부 타입과 �
         <RightPanel
           name={name}
           setName={setName}
-          ageRange={ageRange}          // 추가
-          setAgeRange={setAgeRange}    // 추가
+          ageRange={ageRange}
+          setAgeRange={setAgeRange}
           skinConcerns={skinConcerns}
           handleConcernChange={handleConcernChange}
           gender={gender}
