@@ -5,7 +5,7 @@ import skinData from '../data/data.json'; // JSON 임포트
 import './StepTwo.css';
 
 interface ZScoreAvg {
-  '색소침착 개수수': number;
+  '색소침착 개수': number;
   '수분': number;
   '탄력': number;
   '모공 개수': number;
