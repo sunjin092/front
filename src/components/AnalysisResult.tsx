@@ -17,20 +17,20 @@ interface AnalysisResultProps {
   graphData: {
     '수분': number;
     '탄력': number;
-    '색소침착 개수': number;
-    '모공 개수': number;
+    '색소침착': number;
+    '모공': number;
   };
 }
 
 const AnalysisResult: React.FC<AnalysisResultProps> = ({ graphData }) => {
-  const labels = ['색소침착 개수', '수분', '탄력', '모공 개수'];
+  const labels = ['색소침착', '수분', '탄력', '모공'];
 
   // -2를 0으로 offset 주기 위해 모두 +2
   const dataValues = [
-    graphData['색소침착 개수'] + 2,
+    graphData['색소침착'] + 2,
     graphData['수분'] + 2,
     graphData['탄력'] + 2,
-    graphData['모공 개수'] + 2,
+    graphData['모공'] + 2,
   ];
 
   const data = {
