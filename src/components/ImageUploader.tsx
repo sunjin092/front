@@ -10,16 +10,16 @@ const ImageUploader: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // StepOne 페이지에서 전달된 사용자 입력값 가져오기
     const state = location.state as {
       gender: string;
-      age: number;
+      age: string;
       concerns: string[];
     };
     if (state) {
-      setGender(state.gender);
-      setAge(state.age);
-      setSelectedConcerns(state.concerns);
+      setGender(state.gender ?? '');
+      const parsedAge = parseInt(state.age.replace('대', ''));
+      setAge(isNaN(parsedAge) ? 0 : parsedAge);
+      setSelectedConcerns(state.concerns ?? []);
     }
   }, [location.state]);
 
@@ -40,6 +40,13 @@ const ImageUploader: React.FC = () => {
     formData.append('gender', gender);
     formData.append('age', age.toString());
     formData.append('concerns', JSON.stringify(selectedConcerns));
+
+    console.log('폼 전송 내용:', {
+      gender,
+      age,
+      concerns: selectedConcerns,
+      file: selectedFile.name
+    });
 
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/analyze-recommend`, {
