@@ -8,7 +8,7 @@ export interface Product {
   reviewCount?: number;
   tags: string[];
   image: string;
-  link?: string;
+  link?: string;  // JSON의 '제품링크' 필드
 }
 
 interface ProductRecommendationsProps {
@@ -24,9 +24,7 @@ const ProductRecommendations: React.FC<ProductRecommendationsProps> = ({ product
           <li key={idx} className="product-card">
             {/* 텍스트 정보 */}
             <div className="product-info">
-              <div className="product-header">
-                {product.brand}
-              </div>
+              <div className="product-header">{product.brand}</div>
               <div className="product-name">{product.name}</div>
               <div className="product-tags">
                 {product.tags.map((tag, i) => (
@@ -37,7 +35,7 @@ const ProductRecommendations: React.FC<ProductRecommendationsProps> = ({ product
               <div className="product-rating">⭐ {product.rating}</div>
             </div>
 
-            {/* 이미지 및 링크 */}
+            {/* 이미지 클릭 시만 링크 이동 */}
             <div className="product-media">
               {product.link ? (
                 <a href={product.link} target="_blank" rel="noopener noreferrer">
