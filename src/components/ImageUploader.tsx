@@ -10,22 +10,21 @@ const ImageUploader: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-  const state = location.state as {
-    gender?: string;
-    age?: number;
-    concerns?: string[];
-  };
+    const state = location.state as {
+      gender?: string;
+      age?: number;
+      concerns?: string[];
+    };
 
-  if (state?.gender && state?.age) {
-    setGender(state.gender);
-    setAge(state.age); // 여기서 그냥 숫자로 바로 사용
-    setSelectedConcerns(state.concerns ?? []);
-  } else {
-    alert('입력 정보가 누락되어 첫 페이지로 이동합니다.');
-    navigate('/');
-  }
-}, [location.state]);
-
+    if (state?.gender && state?.age && state.concerns?.length) {
+      setGender(state.gender);
+      setAge(state.age);
+      setSelectedConcerns(state.concerns);
+    } else {
+      alert('입력 정보가 누락되어 첫 페이지로 이동합니다.');
+      navigate('/');
+    }
+  }, [location.state]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -34,13 +33,13 @@ const ImageUploader: React.FC = () => {
   };
 
   const handleUpload = async () => {
-    if (!selectedFile || !gender || !age) {
-      alert('이미지, 성별, 나이 정보가 누락되었습니다.');
+    if (!selectedFile || !gender || !age || selectedConcerns.length === 0) {
+      alert('이미지, 성별, 나이, 고민 정보를 모두 입력해주세요.');
       return;
     }
 
     const formData = new FormData();
-    formData.append('file', selectedFile);
+    formData.append('file', selectedFile); // 반드시 'file'
     formData.append('gender', gender);
     formData.append('age', age.toString());
     formData.append('concerns', JSON.stringify(selectedConcerns));
