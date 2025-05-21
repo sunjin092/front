@@ -40,9 +40,9 @@ const ImageUploader: React.FC = () => {
 
     const formData = new FormData();
     formData.append('file', selectedFile);
-    formData.append('gender', gender === '여성' ? '여' : '남');  // 여기 수정 ✅
+    formData.append('gender', gender === '여성' ? '여' : '남');
     formData.append('age', age.toString());
-    formData.append('concerns', JSON.stringify(selectedConcerns));
+    formData.append('concerns', selectedConcerns.join(','));
 
     console.log('폼 전송 내용:', {
       gender: gender === '여성' ? '여' : '남',
