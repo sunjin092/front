@@ -76,7 +76,7 @@ const ImageUploader: React.FC = () => {
       // ✅ 분석 결과 저장
       localStorage.setItem('analysisResult', JSON.stringify(data));
 
-      navigate('/result');
+      navigate('/steptwo');
     } catch (error) {
       alert('이미지 분석에 실패했습니다.');
       console.error('❌ 분석 요청 실패:', error);

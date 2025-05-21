@@ -43,7 +43,7 @@ function App() {
           <Route path="/stepone" element={<StepOne />} />
           <Route path="/steptwo" element={<StepTwo />} />
           <Route path="/stepthree" element={<StepThree />} />
-          <Route path="/result" element={<StepTwo />} />
+          {/* <Route path="/result" element={<StepTwo />} /> */}
         </Routes>
       </div>
     </>
