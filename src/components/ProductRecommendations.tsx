@@ -22,49 +22,31 @@ const ProductRecommendations: React.FC<ProductRecommendationsProps> = ({ product
       <ul className="product-list">
         {products.map((product, idx) => (
           <li key={idx} className="product-card">
-            {product.link ? (
-              <a
-                href={product.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: 'none', color: 'inherit', display: 'flex', justifyContent: 'space-between' }}
-              >
-                {/* 텍스트 정보 */}
-                <div className="product-info">
-                  <div className="product-header">{product.brand}</div>
-                  <div className="product-name">{product.name}</div>
-                  <div className="product-tags">
-                    {product.tags.map((tag, i) => (
-                      <span key={i} className="product-tag">#{tag} </span>
-                    ))}
-                  </div>
-                  <div className="product-volume">{product.volumePrice}</div>
-                  <div className="product-rating">⭐ {product.rating}</div>
-                </div>
-
-                {/* 이미지 */}
-                <div className="product-media">
-                  <img src={product.image} alt={product.name} className="product-image" />
-                </div>
-              </a>
-            ) : (
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div className="product-info">
-                  <div className="product-header">{product.brand}</div>
-                  <div className="product-name">{product.name}</div>
-                  <div className="product-tags">
-                    {product.tags.map((tag, i) => (
-                      <span key={i} className="product-tag">#{tag} </span>
-                    ))}
-                  </div>
-                  <div className="product-volume">{product.volumePrice}</div>
-                  <div className="product-rating">⭐ {product.rating}</div>
-                </div>
-                <div className="product-media">
-                  <img src={product.image} alt={product.name} className="product-image" />
-                </div>
+            {/* 텍스트 정보 */}
+            <div className="product-info">
+              <div className="product-header">
+                {product.brand}
               </div>
-            )}
+              <div className="product-name">{product.name}</div>
+              <div className="product-tags">
+                {product.tags.map((tag, i) => (
+                  <span key={i} className="product-tag">#{tag} </span>
+                ))}
+              </div>
+              <div className="product-volume">{product.volumePrice}</div>
+              <div className="product-rating">⭐ {product.rating}</div>
+            </div>
+
+            {/* 이미지 및 링크 */}
+            <div className="product-media">
+              {product.link ? (
+                <a href={product.link} target="_blank" rel="noopener noreferrer">
+                  <img src={product.image} alt={product.name} className="product-image" />
+                </a>
+              ) : (
+                <img src={product.image} alt={product.name} className="product-image" />
+              )}
+            </div>
           </li>
         ))}
       </ul>
