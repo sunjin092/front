@@ -17,7 +17,7 @@ const StepThree: React.FC = () => {
         reviewCount: 0,  // 리뷰 개수 정보가 없으니 0 또는 생략 가능
         tags: item.태그,
         image: item.이미지,
-        link: '',  // 링크 정보 없으면 빈 문자열
+        link: `https://www.glowpick.com/search?keyword=${encodeURIComponent(item.제품명)}`
       }));
 
       setProducts(convertedProducts);
