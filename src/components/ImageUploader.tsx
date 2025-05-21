@@ -14,6 +14,7 @@ const ImageUploader: React.FC = () => {
       gender?: string;
       age?: number;
       concerns?: string[];
+      name?: string;
     };
 
     if (state?.gender && state?.age && state.concerns?.length) {
@@ -21,14 +22,14 @@ const ImageUploader: React.FC = () => {
       setAge(state.age);
       setSelectedConcerns(state.concerns);
 
-      // ✅ 이름과 나이대 저장 (나중에 /result에서 사용)
-      localStorage.setItem('userName', '사용자'); // 또는 다른 이름 값이 있다면 state.name 사용
+      // ✅ 이름과 나이대 localStorage에 저장 (Result 페이지에서 사용)
+      localStorage.setItem('userName', state.name || '사용자');
       localStorage.setItem('ageRange', `${state.age}대`);
     } else {
       alert('입력 정보가 누락되어 첫 페이지로 이동합니다.');
       navigate('/');
     }
-  }, [location.state]);
+  }, [location.state, navigate]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -68,11 +69,17 @@ const ImageUploader: React.FC = () => {
       }
 
       const data = await response.json();
+
+      // ✅ 콘솔에 백엔드 응답 전체 출력
+      console.log('✅ 백엔드에서 받은 응답 데이터:', data);
+
+      // ✅ 분석 결과 저장
       localStorage.setItem('analysisResult', JSON.stringify(data));
+
       navigate('/result');
     } catch (error) {
       alert('이미지 분석에 실패했습니다.');
-      console.error(error);
+      console.error('❌ 분석 요청 실패:', error);
     }
   };
 

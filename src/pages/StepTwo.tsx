@@ -20,28 +20,31 @@ const Result: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedResult = localStorage.getItem('analysisResult');
-    if (storedResult) {
-      try {
-        const parsed = JSON.parse(storedResult);
-        setZScoreAvg(parsed.analysis.z_score_avg);
-        setPriorityConcern(parsed.analysis.priority_concern);
-      } catch (err) {
-        console.error('분석 결과 파싱 실패:', err);
-        alert('분석 데이터를 불러오지 못했습니다.');
-        navigate('/');
-      }
-    } else {
-      alert('분석 결과가 없습니다. 처음부터 다시 진행해주세요.');
+  const storedResult = localStorage.getItem('analysisResult');
+  if (storedResult) {
+    try {
+      const parsed = JSON.parse(storedResult);
+
+      console.log('✅ 백엔드 분석 결과 전체:', parsed);  // ← 여기 추가
+
+      setZScoreAvg(parsed.analysis.z_score_avg);
+      setPriorityConcern(parsed.analysis.priority_concern);
+    } catch (err) {
+      console.error('분석 결과 파싱 실패:', err);
+      alert('분석 데이터를 불러오지 못했습니다.');
       navigate('/');
     }
+  } else {
+    alert('분석 결과가 없습니다. 처음부터 다시 진행해주세요.');
+    navigate('/');
+  }
 
-    const storedName = localStorage.getItem('userName');
-    if (storedName) setName(storedName);
+  const storedName = localStorage.getItem('userName');
+  if (storedName) setName(storedName);
 
-    const storedAge = localStorage.getItem('ageRange');
-    if (storedAge) setAge(storedAge);
-  }, []);
+  const storedAge = localStorage.getItem('ageRange');
+  if (storedAge) setAge(storedAge);
+}, []);
 
   const handleNextClick = () => {
     navigate('/stepthree');
