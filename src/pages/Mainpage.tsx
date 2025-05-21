@@ -40,12 +40,19 @@ const fullText = `개인의 피부 이미지를 분석하여, 피부 타입과 �
 
   useEffect(() => {
     if (startAnimation) {
-      const timer = setTimeout(() => {
-        navigate('/stepone');
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [startAnimation, navigate]);
+     const timer = setTimeout(() => {
+       navigate('/stepone', {
+        state: {
+          gender,
+          age: parseInt(ageRange),
+          concerns: skinConcerns
+        }
+      });
+    }, 1000);
+    return () => clearTimeout(timer);
+  }
+}, [startAnimation, navigate, gender, ageRange, skinConcerns]);
+
 
   const handleConcernChange = (concern: string) => {
     setSkinConcerns((prev) =>
