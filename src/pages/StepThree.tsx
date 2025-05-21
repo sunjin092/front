@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProductRecommendations, { Product } from '../components/ProductRecommendations';
-import data from '../data/data.json';  // data.json 경로에 맞게 수정하세요
+// import data from '../data/data.json';  // data.json 경로에 맞게 수정하세요
 import './StepThree.css';
 
 const StepThree: React.FC = () => {
