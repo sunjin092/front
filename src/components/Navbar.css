@@ -1,0 +1,55 @@
+.step-navbar {
+     position: fixed;   
+     top: 0;                      /* 👈 맨 위에 위치 */
+       z-index: 1000;               /* 다른 요소 위에 표시되도록 z-index 설정 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  height: 60px;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.664);
+  width:30%;
+  height:5%;
+  background-color: rgba(240, 248, 255, 0.856);
+  border-radius: 20px;
+}
+
+/* 🔙 작고 왼쪽 정렬된 버튼 */
+.back-button {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #333;
+  cursor: pointer;
+  padding: 4px 8px;
+  margin-right: 12px;
+  width: 35px;
+}
+
+.back-button:hover{
+    background:  #366bff;
+}
+
+/* 스텝 블록 컨테이너 */
+.step-container {
+  display: flex;
+  gap: 7px; /* 👉 간격을 줄였습니다 (원래는 1px이었지만 너무 붙어보이면 4px 권장) */
+  flex: 1;
+  justify-content: center; /* 가운데 정렬로 변경하면 자연스럽게 양쪽 여백도 확보돼요 */
+}
+/* 개별 스텝 블록 */
+.step-block {
+  height: 6px;
+  width: 60px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+/* 활성화된 스텝 */
+.step-block.active {
+  background-color: #002da7de;
+}
+
+
