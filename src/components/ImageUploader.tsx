@@ -20,6 +20,10 @@ const ImageUploader: React.FC = () => {
       setGender(state.gender);
       setAge(state.age);
       setSelectedConcerns(state.concerns);
+
+      // ✅ 이름과 나이대 저장 (나중에 /result에서 사용)
+      localStorage.setItem('userName', '사용자'); // 또는 다른 이름 값이 있다면 state.name 사용
+      localStorage.setItem('ageRange', `${state.age}대`);
     } else {
       alert('입력 정보가 누락되어 첫 페이지로 이동합니다.');
       navigate('/');
@@ -43,9 +47,8 @@ const ImageUploader: React.FC = () => {
     formData.append('gender', gender === '여성' ? '여' : '남');
     formData.append('age_group', `${age}대`);
     selectedConcerns.forEach((item) => {
-        formData.append('concerns', item);
+      formData.append('concerns', item);
     });
-
 
     console.log('폼 전송 내용:', {
       gender: gender === '여성' ? '여' : '남',
