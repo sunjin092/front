@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import './ImageUploader.css'; // ✅ 추가한 CSS 연결
 
 const ImageUploader: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [gender, setGender] = useState('');
   const [age, setAge] = useState<number>(0);
   const [selectedConcerns, setSelectedConcerns] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,7 +26,6 @@ const ImageUploader: React.FC = () => {
         setSelectedConcerns(state.concerns);
       }
 
-      // ✅ 이름과 나이대 localStorage에 저장 (Result 페이지에서 사용)
       localStorage.setItem('userName', state.name || '사용자');
       localStorage.setItem('ageRange', `${state.age}대`);
     } else {
@@ -45,6 +46,8 @@ const ImageUploader: React.FC = () => {
       return;
     }
 
+    setIsLoading(true);
+
     const formData = new FormData();
     formData.append('file', selectedFile);
     formData.append('gender', gender === '여성' ? '여' : '남');
@@ -53,35 +56,24 @@ const ImageUploader: React.FC = () => {
       formData.append('concerns', item);
     });
 
-    console.log('폼 전송 내용:', {
-      gender: gender === '여성' ? '여' : '남',
-      age,
-      concerns: selectedConcerns,
-      file: selectedFile.name
-    });
-
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/analyze-recommend`, {
         method: 'POST',
         body: formData,
       });
 
-      if (!response.ok) {
-        throw new Error('서버 응답 오류');
-      }
+      if (!response.ok) throw new Error('서버 응답 오류');
 
       const data = await response.json();
-
-      // ✅ 콘솔에 백엔드 응답 전체 출력
       console.log('✅ 백엔드에서 받은 응답 데이터:', data);
 
-      // ✅ 분석 결과 저장
       localStorage.setItem('analysisResult', JSON.stringify(data));
-
       navigate('/steptwo');
     } catch (error) {
       alert('이미지 분석에 실패했습니다.');
       console.error('❌ 분석 요청 실패:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -90,9 +82,16 @@ const ImageUploader: React.FC = () => {
       <p>피부 이미지 업로드</p>
       <input id="file-upload" type="file" accept="image/*" onChange={handleFileChange} />
 
-      <button type="button" onClick={handleUpload}>
-        분석 요청
+      <button type="button" onClick={handleUpload} disabled={isLoading}>
+        {isLoading ? '분석 중...' : '분석 요청'}
       </button>
+
+      {isLoading && (
+        <div className="spinner-box">
+          <div className="spinner" />
+          <p>분석 중입니다. 잠시만 기다려주세요...</p>
+        </div>
+      )}
     </div>
   );
 };
