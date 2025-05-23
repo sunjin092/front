@@ -17,10 +17,12 @@ const ImageUploader: React.FC = () => {
       name?: string;
     };
 
-    if (state?.gender && state?.age && state.concerns?.length) {
+    if (state?.gender && state?.age) {
       setGender(state.gender);
       setAge(state.age);
-      setSelectedConcerns(state.concerns);
+      if (state.concerns?.length) {
+        setSelectedConcerns(state.concerns);
+      }
 
       // ✅ 이름과 나이대 localStorage에 저장 (Result 페이지에서 사용)
       localStorage.setItem('userName', state.name || '사용자');
@@ -38,8 +40,8 @@ const ImageUploader: React.FC = () => {
   };
 
   const handleUpload = async () => {
-    if (!selectedFile || !gender || !age || selectedConcerns.length === 0) {
-      alert('이미지, 성별, 나이, 고민 정보를 모두 입력해주세요.');
+    if (!selectedFile || !gender || !age) {
+      alert('이미지, 성별, 나이 정보를 모두 입력해주세요.');
       return;
     }
 
