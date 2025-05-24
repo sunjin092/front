@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,10 +8,10 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import annotationPlugin from 'chartjs-plugin-annotation'; // ✅ 추가
+import annotationPlugin from 'chartjs-plugin-annotation';
 import { Bar } from 'react-chartjs-2';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, annotationPlugin); // ✅ 플러그인 등록
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, annotationPlugin);
 
 interface AnalysisResultProps {
   graphData: {
@@ -25,12 +25,20 @@ interface AnalysisResultProps {
 const AnalysisResult: React.FC<AnalysisResultProps> = ({ graphData }) => {
   const labels = ['색소침착', '수분', '탄력', '모공'];
 
-  // -2를 0으로 offset 주기 위해 모두 +2
+  // ✅ 색소침착과 모공은 z-score가 클수록 bad → 반전 적용
+  const rawZ = {
+    색소침착: -graphData['색소침착'],
+    수분: graphData['수분'],
+    탄력: graphData['탄력'],
+    모공: -graphData['모공'],
+  };
+
+  // ✅ 좌표 시각화를 위한 +2 보정
   const dataValues = [
-    graphData['색소침착'] + 2,
-    graphData['수분'] + 2,
-    graphData['탄력'] + 2,
-    graphData['모공'] + 2,
+    rawZ['색소침착'] + 2,
+    rawZ['수분'] + 2,
+    rawZ['탄력'] + 2,
+    rawZ['모공'] + 2,
   ];
 
   const data = {
@@ -54,21 +62,15 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ graphData }) => {
       x: {
         min: 0,
         max: 4,
+        ticks: {
+          color: '#FF5E99',
+          callback: () => '', // 눈금 텍스트 숨김
+        },
         title: {
           display: true,
           text: '',
         },
-        grid: {
-          // drawOnChartArea: false,
-          // drawTicks: false,
-          // drawBorder: false,
-        },
-        ticks: {
-          callback: function (value: number) {
-            return value === 2 ? '' : '';
-          },
-          color: '#FF5E99',
-        },
+        grid: {},
       },
       y: {
         ticks: {
@@ -79,7 +81,6 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ graphData }) => {
           },
         },
         grid: {
-          // drawOnChartArea: false,
           drawTicks: false,
           drawBorder: false,
         },
@@ -88,6 +89,16 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ graphData }) => {
     plugins: {
       legend: {
         display: false,
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context: any) {
+            const index = context.dataIndex;
+            const label = context.chart.data.labels?.[index];
+            const rawValue = Object.values(rawZ)[index];
+            return `${label}: z-score ${rawValue.toFixed(2)}`;
+          },
+        },
       },
       title: {
         display: true,
