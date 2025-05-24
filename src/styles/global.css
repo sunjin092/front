@@ -53,6 +53,11 @@ input, select {
     background-color: #FFFFFF;
     color: #111827;
 }
+.responsive-box {
+  width: 500px;
+  height: 400px;
+  margin-top: 40px;
+}
 
 @media (max-width: 600px) {
   .right-panel {
@@ -98,7 +103,7 @@ input, select {
     .step-navbar{
         width:100%
     } 
+  .responsive-box {
+    width: 80%; /* 또는 100%로 꽉 차게 하고 싶으면 width: 100%; */
 
-}
-
-
+  }}
