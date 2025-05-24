@@ -71,4 +71,34 @@ input, select {
   .white-box {
     display: block; /* ✅ flex를 제거 */
   }
+    .StepOneContainer {
+    width: 100%;
+    margin: 75px 0 20px 0;
+    border-radius: 0; /* 필요하면 모서리 제거 */
+    box-shadow: none; /* 그림자도 제거 가능 */
+    border: none;
+    padding: 20px 10px;
+  }
+      .StepTwoContainer {
+    width: 100%;
+    margin: 75px 0 20px 0;
+    border-radius: 0; /* 필요하면 모서리 제거 */
+    box-shadow: none; /* 그림자도 제거 가능 */
+    border: none;
+    padding: 20px 10px;
+  }
+      .StepThreeContainer {
+    width: 100%;
+    margin: 75px 0 20px 0;
+    border-radius: 0; /* 필요하면 모서리 제거 */
+    box-shadow: none; /* 그림자도 제거 가능 */
+    border: none;
+    padding: 20px 10px;
+  }
+    .step-navbar{
+        width:100%
+    } 
+
 }
+
+

@@ -28,7 +28,7 @@ function App() {
   return (
     <>
       
-    <div className="container">
+    <div className={`container ${showNavbar ? 'step-container' : ''}`}>
             {showNavbar && (
 
                 <Navbar
