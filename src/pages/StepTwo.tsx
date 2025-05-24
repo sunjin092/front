@@ -79,9 +79,9 @@ const Result: React.FC = () => {
           fontWeight: 'bold',
         }}
       >
-        <div>낮음</div>
+        <div>bad</div>
         <div>{age} 평균</div>
-        <div>높음</div>
+        <div>good</div>
       </div>
 
       <button className="next-button" onClick={handleNextClick}>
