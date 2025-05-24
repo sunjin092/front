@@ -6,6 +6,7 @@ body {
     font-family: 'SUIT', sans-serif;
     background-color: #ffffff9f; /* 연한 블루 배경 */
     color: #111827;
+    height: 100%;
     /* padding-top: 100px; */
     /* height: 100vw; */
 }
@@ -54,20 +55,20 @@ input, select {
 }
 
 @media (max-width: 600px) {
-    body {
-        font-size: 15px;
-    }
+  .right-panel {
+        width: 100%;
+  }
 
-    h2 {
-        font-size: 20px;
-    }
+  .left-panel {
 
-    button {
-        font-size: 16px;
-        padding: 12px;
-    }
+    display: none;
+  }
 
-    input, select {
-        font-size: 15px;
-    }
+  .main-container {
+    padding: 20px;
+  }
+
+  .white-box {
+    display: block; /* ✅ flex를 제거 */
+  }
 }
