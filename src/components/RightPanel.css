@@ -151,6 +151,9 @@ select.small-input {
     padding: 20px 16px;
     height: 100dvh;
     overflow-y: auto;
+    overflow-x: hidden; /* ✅ 여기도 명시 */
+    max-width: 100vw;   /* ✅ 뷰포트 이상 못 넘게 */
+    box-sizing: border-box;
   }
 
   .logo-wrapper {
