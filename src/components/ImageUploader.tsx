@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import './ImageUploader.css'; // ✅ 추가한 CSS 연결
+import './ImageUploader.css';
 
 const ImageUploader: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -26,7 +26,12 @@ const ImageUploader: React.FC = () => {
         setSelectedConcerns(state.concerns);
       }
 
-      localStorage.setItem('userName', state.name || '사용자');
+      if (state.name && state.name.trim()) {
+        localStorage.setItem('userName', state.name);
+      } else {
+        localStorage.setItem('userName', '사용자');
+      }
+
       localStorage.setItem('ageRange', `${state.age}대`);
     } else {
       alert('입력 정보가 누락되어 첫 페이지로 이동합니다.');
@@ -87,9 +92,8 @@ const ImageUploader: React.FC = () => {
       </button>
 
       {isLoading && (
-        <div className="spinner-box">
+        <div className="spinner-overlay">
           <div className="spinner" />
-          <p>분석 중입니다. 잠시만 기다려주세요...</p>
         </div>
       )}
     </div>
