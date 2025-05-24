@@ -245,7 +245,7 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ graphData }) => {
       },
       title: {
         display: true,
-        text: '피부 진단 지표 (z-score)',
+        text: '피부 진단 지표',
         font: {
           size: 18,
         },
