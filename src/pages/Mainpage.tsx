@@ -47,6 +47,7 @@ const MainPage: React.FC = () => {
             gender,
             age: parseInt(ageRange),
             concerns: skinConcerns,
+            name,
           },
         });
       }, 1000);
