@@ -1,6 +1,6 @@
 .right-panel {
   flex: 0.5;
-  padding: 24px 20px;             /* 패딩 줄이기 */
+  padding: 20px 16px;              /* ⬅️ 상하좌우 여백 축소 */
   display: flex;
   flex-direction: column;
   position: relative;
@@ -9,71 +9,16 @@
   background-color: white;
   border-radius: 20px;
 
-  height: 100vh;                  /* ✅ 화면에 딱 맞게 고정 */
-  overflow-y: hidden;             /* ✅ 스크롤 제거 */
+  height: 100vh;                   /* ✅ 화면 높이 고정 */
+  overflow-y: hidden;              /* ✅ 스크롤 제거 */
   box-sizing: border-box;
-}
-
-.logo-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  font-size: 24px;
-}
-
-.logo-img {
-  width: 8%;
-  z-index: 1;
-}
-
-.logo-title {
-  font-weight: bold;
-  font-size: 100%;
-  margin-left: -16px;
-  margin-top: 30px;
-  z-index: 2;
-  position: relative;
-  display: flex;
-  align-items: center;
-  white-space: normal;
-  word-break: keep-all;
-  text-align: center;
-}
-
-.small-input:focus {
-  border-color: #2962ff;
-  outline: none;
 }
 
 .checkbox-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  font-size: 10px;
-}
-
-/* ✅ 고민 버튼 - 성별 버튼과 동일한 크기로 조정 */
-.checkbox-item {
-  color: #444;
-  padding: 6px 12px;               /* 동일 패딩 */
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.2s, color 0.2s;
-  font-size: 14px;                 /* 동일 폰트 */
-  margin: 4px;
-}
-
-.checkbox-item.selected {
-  background-color: #2962ff;
-  color: white;
-  border-color: #2962ff;
-}
-
-.checkbox-item input[type='checkbox'] {
-  display: none;
+  gap: 8px;                        /* ⬅️ 버튼 간 간격 축소 */
+  margin-bottom: 8px;
 }
 
 .radio-group {
@@ -81,8 +26,20 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 16px;                       /* ⬅️ 간격 살짝 축소 */
+  margin-bottom: 12px;
+}
+
+.checkbox-item {
+  color: #444;
+  padding: 6px 12px;              /* ✅ 성별 버튼과 동일하게 유지 */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s, color 0.2s;
+  font-size: 14px;
+  margin: 4px;
 }
 
 .radio-item {
@@ -91,40 +48,13 @@
   border-radius: 8px;
   cursor: pointer;
   color: #444;
-  transition: background-color 0.2s, color 0.2s;
   user-select: none;
-}
-
-.radio-item.selected {
-  background-color: #2962ff;
-  color: white;
-  border-color: #2962ff;
-}
-
-.radio-item input[type='radio'] {
-  display: none;
+  font-size: 14px;
 }
 
 .signin-btn {
-  margin-top: 16px;                /* 버튼 너무 아래 안 가게 조정 */
-}
-
-/* 애니메이션 시 오른쪽 패널 스타일 */
-.animate-transition .right-panel {
-  width: 30%;
-  flex: 0.5;
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
-  height: 100%;
-  background-color: white;
-}
-
-select.small-input {
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  width: 90%;
-  margin-bottom: 10px;
+  margin-top: 12px;               /* ⬅️ 버튼이 너무 아래 안 가게 */
+  padding: 10px 0;
+  font-size: 15px;
+  font-weight: bold;
 }
