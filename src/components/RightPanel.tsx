@@ -69,9 +69,9 @@ const RightPanel: React.FC<RightPanelProps> = ({
       </select>
 
       {/* 피부 고민 */}
-      <label className='biglabel'>피부 고민 (최대 3개 선택)</label>
+      <label className='biglabel'>피부 고민 (최대 2개 선택)</label>
       <div className="checkbox-group">
-        {['트러블', '피부톤', '각질/피부결', '민감성', '자외선 차단', '유기농'].map((item) => (
+        {['트러블', '피부톤', '각질/피부결', '민감성', '유기농'].map((item) => (
           <label
             key={item}
             className={`checkbox-item ${skinConcerns.includes(item) ? 'selected' : ''}`}
@@ -81,7 +81,7 @@ const RightPanel: React.FC<RightPanelProps> = ({
               value={item}
               checked={skinConcerns.includes(item)}
               onChange={() => handleConcernChange(item)}
-              disabled={!skinConcerns.includes(item) && skinConcerns.length >= 3}
+              disabled={!skinConcerns.includes(item) && skinConcerns.length >= 2}
             />
             {item}
           </label>
