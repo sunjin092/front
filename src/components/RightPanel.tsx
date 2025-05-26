@@ -65,7 +65,7 @@ const RightPanel: React.FC<RightPanelProps> = ({
         <option value="30대">30대</option>
         <option value="40대">40대</option>
         <option value="50대">50대</option>
-        <option value="60대 이상">60대 이상</option>
+        <option value="60대">60대 이상</option>
       </select>
 
       {/* 피부 고민 */}
